@@ -7,6 +7,7 @@
 
 import Foundation
 import Observation
+import Combine
 
 @Observable class HomePageViewModel {
     private let useCase: CharacterUseCase
@@ -48,3 +49,16 @@ import Observation
         }
     }
 }
+
+
+extension SectionRowModel {
+    init(businessModel: CharacterBusinessModel) {
+        self.id =  businessModel.id
+        self.title = businessModel.name
+        self.subtitle = businessModel.species.rawValue
+        self.text = "\(String(describing: businessModel.gender.rawValue )) - \(businessModel.origin.name) - \(String(describing: businessModel.status.rawValue)) "
+        self.image = businessModel.image
+        self.progress = businessModel.status == .alive ? 1.0 : 0.1
+    }
+}
+

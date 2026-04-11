@@ -106,6 +106,7 @@ enum StatusBusinessModel: Codable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
+        
         let value: String
         switch self {
         case .alive: value = "Alive"
@@ -113,6 +114,16 @@ enum StatusBusinessModel: Codable {
         case .unknown: value = "unknown"
         }
         try container.encode(value)
+    }
+}
+
+extension StatusBusinessModel {
+    var rawValue: String {
+        switch self {
+        case .alive: return "Alive"
+        case .dead: return "Dead"
+        case .unknown: return "unknown"
+        }
     }
 }
 
@@ -142,6 +153,16 @@ enum GenderBusinessModel: Codable {
         case .unknown: value = "unknown"
         }
         try container.encode(value)
+    }
+}
+
+extension GenderBusinessModel {
+    var rawValue: String {
+        switch self {
+        case .female: return "Female"
+        case .male: return "Male"
+        case .unknown: return "unknown"
+        }
     }
 }
 
@@ -179,6 +200,18 @@ enum SpeciesBusinessModel: Codable {
         case .unknown(let raw): value = raw
         }
         try container.encode(value)
+    }
+}
+
+extension SpeciesBusinessModel {
+    var rawValue: String {
+        switch self {
+        case .alien: return "Alien"
+        case .human: return "Human"
+        case .humanoid: return "Humanoid"
+        case .mythologicalCreature: return "Mythological Creature"
+        case .unknown: return "Unknown"
+        }
     }
 }
 
