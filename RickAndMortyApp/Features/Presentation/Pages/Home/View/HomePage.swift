@@ -31,6 +31,21 @@ struct HomePage: View {
             }
         }
         .overlay(NavigationBarView(title: "Characters", contentHasScrolled: $contentHasScrolled))
+        .statusBar(hidden: !showStatusBar)
+        .onAppear {
+            Task {
+                await viewModel.loadCharacterList()
+            }
+        }
+        .alert(isPresented: $showDetail) {
+            
+            Alert(title: Text("Important Messaje"),
+                  message: Text(viewModel.viewError?.localizedDescription ?? "Unexpected error is happen"),
+                  dismissButton: .default(Text("Go it!")))
+            
+        }.sheet(isPresented: $showDetail) {
+            CharacterDetailPage(character: selectedCharacter)
+        }
     }
     
     var scrollView: some View {

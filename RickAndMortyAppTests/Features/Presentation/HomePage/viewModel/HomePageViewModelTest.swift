@@ -37,6 +37,7 @@ extension HomePageViewModelTest {
         await sut?.loadCharacterList()
         XCTAssertFalse(sut?.characterList.isEmpty ?? false)
         XCTAssertTrue(sut?.characterList.first?.id == 21)
+        
         XCTAssertNil(sut?.viewError)
         if let hasError = sut?.hasError {
             XCTAssertFalse(hasError)
