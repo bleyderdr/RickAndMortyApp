@@ -71,10 +71,19 @@ extension DefaultCharacterRepository {
 
 extension DefaultCharacterRepository {
     private func getEndpointForPagination(by name: String, and pageNumber: String?) -> String {
+        
+        let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        
         if let pageNumber = pageNumber {
-            return RemoteURL.baseUrl + RemoteURL.characterUrl + "\(RemoteURL.name)" + "\(RemoteURL.searchPagination)\(pageNumber)"
+            return RemoteURL.baseUrl
+            + RemoteURL.characterUrl
+            + "\(RemoteURL.name)\(encodedName)"
+            + "\(RemoteURL.searchPagination)\(pageNumber)"
+            
         } else {
-            return RemoteURL.baseUrl + RemoteURL.characterUrl + "\(RemoteURL.name)"
+            return RemoteURL.baseUrl
+            + RemoteURL.characterUrl
+            + "\(RemoteURL.name)\(encodedName)"
         }
     }
 }
